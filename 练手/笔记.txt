@@ -1,0 +1,605 @@
+ public class BaseA {
+    private String a;
+    private String b;
+    public String geta(){
+        return a;
+    }
+     
+     public void seta(){
+        this.a=a;
+     }
+
+     public String getb(){
+        return b;
+    }
+     
+     public void setb(){
+        this.b=b;
+     }
+ }
+
+ JavaBean 是一种JAVA语言写成的可重用组件。JavaBean符合一定规范编写的Java类，不是一种技术，而是一种规范。大家针对这种规范，总结了很多开发技巧、工具函数。符合这种规范的类，可以被其它的程序员或者框架使用。它的方法命名，构造及行为必须符合特定的约定：
+
+所有属性为private。
+
+这个类必须有一个公共的缺省构造函数。即是提供无参数的构造器。
+
+这个类的属性使用getter和setter来访问，其他方法遵从标准命名规范。
+
+这个类应是可序列化的。实现serializable接口。
+
+因为这些要求主要是靠约定而不是靠实现接口，所以许多开发者把JavaBean看作遵从特定命名约定的POJO。
+public class UserInfo implements java.io.Serializable{
+ 
+ 
+//实现serializable接口。
+ 
+private static final long serialVersionUID = 1L;
+ 
+ 
+private String name;
+ 
+private int age;
+ 
+ 
+//无参构造器
+ 
+public UserInfo() {
+ 
+ 
+}
+ 
+ 
+public String getName() {
+ 
+return name;
+ 
+}
+ 
+ 
+public void setName(String name) {
+ 
+this.name = name;
+ 
+}
+ 
+ 
+public int getAge() {
+ 
+return age;
+ 
+}
+ 
+ 
+public void setAge(int age) {
+ 
+this.age = age;
+ 
+}
+
+3333333333333333333333333333333333333333333333
+
+//javabean当中可以有其它的方法
+
+public void userInfoPrint(){
+
+System.out.println("");
+333333333333333333333333333333333333333333
+只需要通过ObjectOutputStream,ObjectInputStream进行操作就可以了。
+
+ //序列化过程
+    public void toSerial() {
+        try {
+            User user = new User("id", "user");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("user.txt"));
+            objectOutputStream.writeObject(user);
+            objectOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+ 
+    //反序列化过程
+    public void fromSerial(){
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("user.txt"));    
+            User user = (User) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+       是的，你没有看错，序列化与反序列化操作过程就是这么的简单。
+ 02
+  Shiro可以帮助我们完成：认证、授权、加密、会话管理、与Web集成、缓存等。而且Shiro的API也是非常简单。     
+03
+一、小程序和公众号
+答案是：可以相互关联。
+
+在微信公众号里可以添加小程序。
+
+
+
+图片有点小，我把文字打出来吧：
+
+可关联已有的小程序或快速创建小程序。已关联的小程序可被使用在自定义菜单和模版消息等场景中。
+公众号可关联同主体的 10 个小程序及不同主体的 3 个小程序。同一个小程序可关联最多 50 个公众号。
+
+1、公众号跳小程序
+比如说 “丰巢快递柜” 公众号关联的小程序：丰巢寄快递。
+
+2、小程序跳公众号
+打开 “丰巢寄快递”，点击右上角的菜单选项，然后点击” 关于丰巢寄快递 “，就可以看见关联的公众号了。
+
+ 
+
+二、小程序和 H5
+答案是：可以相互跳转。
+
+1、小程序跳 H5
+之前一直是有限制，就在 11 月 2 号晚上终于公布，小程序可以跳 H5 的好消息了（前提小程序管理后台配置域名白名单，并且 h5 页面是嵌在小程序里面），忍不住哈哈哈哈哈哈哈哈。
+
+小程序也更新了相应的文档：
+
+
+
+web-view 组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面。但个人类型与海外类型的小程序暂不支持使用。
+
+注：基础库 1.6.4 开始支持，低版本需做兼容处理。
+
+2、H5 跳小程序
+相应的，H5 也可以跳回小程序啦（前提小程序管理后台配置域名白名单，并且 h5 页面是嵌在小程序里面）：
+
+
+
+只要引入路径为 https://res.wx.qq.com/open/js/jweixin-1.3.0.js 的 js 文件，然后在执行以下代码就可以了。
+
+wx.miniProgram.navigateTo({url: '/path/to/page'})
+三、公众号和 H5
+答案是：可以相互跳转。
+
+1、公众号跳 H5
+这个好像一直都是支持的，公众号的自定义菜单呀、自定义消息呀，这些都可以放 H5 链接跳转，这就没啥好讨论了，下面说下 H5 怎么跳转公众号吧。
+
+2、H5 跳公众号
+本身来说这是不可以的，但也有间接的做法，那就是跳转到公众号的历史消息页面，然后再进入微信公众号，这是目前大概最好的做法了。
+
+还是以” 丰巢快递柜 “这个公众号为例，打开公众号，点击” 查看历史消息 “，进入历史消息页面。
+
+可以把这个页面的地址复制出来，然后放到 H5 页面里就 ok 啦。
+
+ 
+
+四、小程序和小程序
+答案是：可以相互跳转。
+
+打开微信小程序开发文档，有一个新增的 API 可以实现。
+
+
+
+但得注意 2 点：
+
+1、低版本需要做兼容处理。
+
+2、相互跳转的小程序必须是同一公众号下关联的。
+04：
+phpStudy是一个PHP调试环境的程序集成包。该程序包集成最新的Apache+PHP+MySQL+phpMyAdmin+ZendOptimizer，一次性安装，无须配置即可使用，是非常方便、好用的PHP调试环境。该程序不仅包括PHP调试环境，还包括了开发工具、开发手册等。
+
+安装过程
+1.到链接: https://www.xp.cn/download.html下载对应的phpstudy版本软件然后安装
+05-
+框架：mybatis、jQuery
+06-
+Elasticsearch是一个建立在全文搜索引擎 Apache Lucene™ 基础上的搜索引擎，可以说Lucene是当今最先进，最高效的全功能开源搜索引擎框架。
+
+但是Lucene只是一个框架，要充分利用它的功能，需要使用JAVA，并且在程序中集成Lucene
+07-
+Solr（读作“solar”）是Apache Lucene项目的开源企业搜索平台。其主要功能包括全文检索、命中标示、分面搜索、动态聚类、数据库集成，以及富文本（如Word、PDF）的处理。Solr是高度可扩展的，并提供了分布式搜索和索引复制。Solr是最流行的企业级搜索引擎，Solr4 还增加了NoSQL支持。
+
+Solr是用Java编写、运行在Servlet容器（如 Apache Tomcat 或Jetty）的一个独立的全文搜索服务器。 Solr采用了 Lucene Java 搜索库为核心的全文索引和搜索，并具有类似REST的HTTP/XML和JSON的API。Solr强大的外部配置功能使得无需进行Java编码，便可对 其进行调整以适应多种类型的应用程序。Solr有一个插件架构，以支持更多的高级定制。
+
+因为2010年 Apache Lucene 和 Apache Solr 项目合并，两个项目是由同一个Apache软件基金会开发团队制作实现的。提到技术或产品时，Lucene/Solr或Solr/Lucene是一样的。
+
+Solr的优缺点
+优点
+
+Solr有一个更大、更成熟的用户、开发和贡献者社区。
+
+支持添加多种格式的索引，如：HTML、PDF、微软 Office 系列软件格式以及 JSON、XML、CSV 等纯文本格式。
+
+Solr比较成熟、稳定。
+
+不考虑建索引的同时进行搜索，速度更快。
+
+缺点
+
+建立索引时，搜索效率下降，实时索引搜索效率不高
+
+
+###Download Windows 恶意软件删除工具 (32-bit) from Official Microsoft Download Center Windows 恶意软件删除工具 (MSRT) 可帮助 Windows 计算机免受流行恶意软件攻击。@@@@win +R %temp%清除垃圾
+####vscode插件：如果你需要将本地文件通过 ftp 的形式上传到局域网的服务器，可以安装sftp这个插件，安装插件sftp。
+（2）配置 sftp.json文件。 插件安装完成后，输入快捷键「cmd+shift+P」弹出命令面板，然后输入sftp:config，回车，当前工程的.vscode文件夹下就会自动生成一个sftp.json文件，我们需要在这个文件里配置的内容可以是：
+• host：服务器的 IP 地址
+• username：用户名
+• privateKeyPath：存放在本地的已配置好的用于登录工作站的密钥文件（也可以是 ppk 文件）
+• remotePath：工作站上与本地工程同步的文件夹路径，需要和本地工程文件根目录同名，且在使用 sftp 上传文件之前，要手动在工作站上 mkdir 生成这个根目录
+• ignore：指定在使用 sftp: sync to remote 的时候忽略的文件及文件夹，注意每一行后面有逗号，最后一行没有逗号在 VS Code 的当前文件里，选择「右键 -> upload」，就可以将本地的代码上传到 指定的 ftp 服务器上（也就是在上方 host 中配置的服务器 ip）。
+我们还可以选择「右键 -> Diff with Remote」，就可以将本地的代码和 ftp 服务器上的代码做对比。
+很好用。在公司会经常用到。Auto Rename Tag，Auto Close Tag，Color Hightlight，Beautify，Bracket Pair Colorizer，qml相关，dash文档
+####192.1.1 9td4t无线密码
+###.api工厂是什么
+通过中台开发你的应用，你将无需写接口，无需写后台，无需买服务器！
+
+只要你会前端开发，即可轻松集成我们的海量api接口，通过在线云后台管理数据
+
+如果你啥都不懂，直接使用我们推荐的开源项目，依然可以做到开箱即用，学习成本几乎为 “0”
+
+
+2.注册api工厂
+首先，先去免费注册一个后台账号：https://admin.it120.cc/。拥有一个属于你自己的中台。
+
+注册后，你就可以用你注册的手机号登录后台了，以后你将可以通过该后台管理你的数据，当然你
+
+也可以通过中台提供的后端api接口文档再度开发属于你自己的定制化后台来管理数据。
+
+这里，你一定要记住一个概念 “专属域名” ，在后面的章节中，有很多地方会使用到这个 “专属域名“。因为api接口地址就与这个专属域名有关，默认生成的是32个字符，你可以修改为自己的较短，易记的个性化专属域名。3.1前端接口文档地址：https://api.it120.cc/doc.html#/home。 3.2后台接口文档地址：https://user.api.it120.cc/doc.html#/home 4.小程序中使用
+拥有这些请求地址只是方便我们在网页，H5中正常使用，但是在小程序中有第二次封装，没想到吧。列如我在小程序中想获取banner列表，代码如下：
+
+WXAPI.banners().then((res)=>{console.log(res)}
+)
+没错就是这么的简单粗暴。具体的可以参考以下文档：（）
+
+轮播图实现（Banner） - 帮助中心 - api工厂 - 创新创业孵化器 - 帮你实现你的创新成就你的创业
+
+小程序封装的api文档说
+###微信小程序使用wxa-plugin-canvas分享海报和朋友圈:之前在写海报的时候自己也封装过一个，这里再给大家推荐一个组件wxa-plugin-canvas。目前就使用感来说还是不错的。这里有一个开源的地址，大家可以把它下载下来放进自己的组件中
+
+开源项目地址：https://github.com/jasondu/wxa-plugin-canvas
+wxa-plugin-canvas是一个生成二维码海报的组件，通过非常简单的配置就可以生成精美的海报
+微信小程序生成二维码
+github地址
+weapp-qrcode 点击查看(欢迎star)，其中附有源工程地址
+
+使用
+在github上下载工程，主要用到的文件是/utils/weapp-qrcode.js文件
+
+引入文件：
+可以将文件直接放在自己工程下面引入使用
+
+import QRCode from '/utils/weapp-qrcode.js'
+使用：
+
+new QRCode('myQrcode',{
+  text: 'http://www.tongxingschool.com',
+  width: 200,
+  height: 200,
+  padding: 12, // 生成二维码四周自动留边宽度，不传入默认为0
+  correctLevel: QRCode.CorrectLevel.L, // 二维码可辨识度
+  callback: (res) => {
+    console.log(res.path)
+    // 接下来就可以直接调用微信小程序的api保存到本地或者将这张二维码直接画在海报上面去，看各自需求
+  }
+})
+结构：
+
+<canvas class="canvas-code"canvas-id="myQrcode" style="background:#fff;width: 200px;height: 200px;"/>
+注意事项
+二维码宽高，js代码和结构中的宽高需要一致，宽高的样式一定要写成内联样式，不然会有意想不到的效果😁
+padding的颜色自己控制即可，canvas的背景色就是留边的颜色
+correctLevel是生成二维码可辨识度的级别，级别越高可辨识度越高，从低到高依次是M、L、H,Q
+####在 vscode 里面下载:error lens(用于类型提示错误)
+
+ts 的类型
+ts 的常用基础类型分为两种：
+js 已有类型
+
+原始类型：number/string/boolean/null/undefined/symbol
+对象类型：object（包括，数组、对象、函数等对象）
+
+ts 新增类型
+
+联合类型
+自定义类型(类型别名)
+接口
+元组
+字面量类型
+枚举
+void
+any
+| 联合类型  变量可以是两种类型之一
+let timer:number|null = null
+类型别名：
+ type 别名 = 类型
+
+type s = string // 定义
+数组类型
+语法：
+typescript复制代码// 写法1：
+let 变量: 类型[] = [值1，...]:
+let numbers: number[] = [1, 3, 5] 
+//  numbers必须是数组，每个元素都必须是数字
+// 写法2：
+let 变量: Array<类型> = [值1，...]
+let strings: Array<string> = ['a', 'b', 'c'] 
+//  strings必须是数组，每个元素都必须是字符串
+
+// 那么就可以统一定义一个函数类型
+type Fn = (n1:number,n2:number) => number 
+const add3 : Fn = (a,b)=>{return a+b }
+// 这样书写起来就简单多啦
+
+。可选参数：在可选参数名的后面添加 ?（问号）
+function slice (a?: number, b?: number) {
+    // ? 跟在参数名字的后面，表示可选的参数
+    // 注意：可选参数只能在 必须参数的后面
+    // 如果可选参数在必选参数的前面，会报错
+    console.log(111);
+    
+  }
+  slice()
+  slice(1)
+  slice(1,2)
+}
+
+interface 接口名  {属性1: 类型1, 属性2: 类型2}
+// 这里用 interface 关键字来声明接口
+interface IGoodItem  {
+	// 接口名称(比如，此处的 IPerson)，可以是任意合法的变量名称，推荐以 `I` 开头
+   name: string, price: number, func: ()=>string
+}
+
+// 声明接口后，直接使用接口名称作为变量的类型
+const good1: IGoodItem = {
+   name: '手表',
+   price: 200,
+   func: function() {
+       return '看时间'
+   }
+}
+const good2: IGoodItem = {
+    name: '手机',
+    price: 2000,
+    func: function() {
+        return '打电话'
+    }}
+
+接口和类型 的区别
+interface（接口）和 type（类型别名）的对比：
+
+相同点：都可以给对象指定类型
+不同点:
+
+接口，只能为对象指定类型。它可以继承。
+类型别名，不仅可以为对象指定类型，实际上可以为任意类型指定别名
+
+
+
+先有的 interface，后有的 type,推荐使用 type
+typescript复制代码// 接口的写法-------------
+interface IPerson {
+	name: string,
+	age: number
+}
+
+const user1：IPerson = {
+	name: 'a',
+	age: 20
+}
+
+// type的写法-------------
+type Person  = {
+	name: string,
+	age: number
+}
+const user2：Person = {
+	name: 'b',
+	age: 20
+}
+
+
+注意：
+
+一般枚举名称以大写字母开头
+枚举中的多个值之间通过 ,（逗号）分隔
+定义好枚举后，直接使用枚举名称作为类型注解
+
+枚举也分数值枚举 和 字符串枚举。
+数值枚举：
+默认情况下，枚举的值是数值。默认为：从 0 开始自增的数值
+当然，也可以给枚举中的成员初始化值
+typescript复制代码enum Direction { Up = 10, Down, Left, Right }
+// Down -> 11、Left -> 12、Right -> 13
+
+enum Direction { Up = 2, Down = 3, Left = 8, Right = 16 }
+
+字符串枚举：
+typescript复制代码enum Direction {
+  Up = 'UP',
+  Down = 'DOWN',
+  Left = 'LEFT',
+  Right = 'RIGHT'
+}
+
+注意：字符串枚举没有自增长行为，因此，字符串枚举的每个成员必须有初始值
+any 类型
+any: 任意的。当类型设置为 any 时，就取消了类型的限制。
+例如：
+typescript复制代码let obj: any = { x: 0 }
+
+obj.bar = 100
+obj()
+// obj 可以是任意类型
+const n: number = obj
+元组是一种特殊的数组。有两点特殊之处
+
+
+它约定了的元素个数
+
+
+它约定了特定索引对应的数据类型
+
+
+举个例子：
+就拿 react 里面的 useState来举例：
+typescript复制代码function useState(n: number): [number, (number)=>void] {
+        const setN = (n1) => {
+            n = n1
+        }
+        return [n, setN]
+    }
+
+const [num ,setNum] = useState(10)
+
+字面量类型
+#####
+一、跳转到定义位置
+查看某个函数的代码，需要跳转到具体的位置，具体的实现方式有下面三种：
+
+1、光标定位到函数，按 F12；
+
+2、光标定位到函数，鼠标右键，转到定义；
+
+3、按住 Ctrl 键，同时点击函数。
+
+二、返回跳转前的位置
+当读懂函数后，需要回到跳转前的位置，具体的实现方式有下面两种：
+
+1、按 ctrl + shift + 8；
+
+2、按 Alt + ← (左箭头)。
+###
+聚合数据是一款API聚合类应用，致力于基于API技术向客户提供覆盖多领域、多场景的标准化API技术服务与集API治理、数据治理和相关技术服务于一体的数字化整体解决方案，助力企业客户实现数字化升级。
+
+聚合数据官网：https://www.juhe.cn/
+
+#应用场景介绍
+通过腾讯轻联，一线业务人员无需编程，零代码，可以使用聚合数据开放API和其他业务系统对接，定时发送通知/数据自动归档等。比如定时发送天气预报、股票数据等。
+
+#百度AI开放平台-全球领先的人工智能服务平台
+网页2023年5月9日 · 百度AI开放平台提供全球领先的语音、图像、NLP等多项人工智能技术， …
+
+车辆分析
+百度AI车辆分析准确识别图像中的车辆相关信息，提供车型识别,车辆检测,车流统 …
+
+文字识别离线SDK
+百度文字识别离线SDK,面向无网或弱网环境下,在手机、摄像头、执法记录仪等设备 …
+
+百度智能云
+百度智能云致力于为企业和开发者提供全球领先的人工智能、大数据和云计算服 …
+
+活体检测
+百度活体检测,提供6种离线/在线方式的人脸活体检测能力,在人脸识别过程中判断操 …
+
+图像识别
+百度AI通用物体和场景识别,支持10万种常见物体和场景识别,开放能力包括通用物体 …
+
+百度智能对话平台UNIT
+对于咨询量和业务量都较大的银行而言，应用AI技术解放人力已经刻不容缓，百度 …
+
+查看更多内容
+全球 Web 图标
+Baidu
+https://developer.baidu.com
+浏览此图像
+百度开发者中心-汇聚、开放、助力、共赢
+网页2023年2月8日 · 百度地图开放平台 提供基于百度地图的应用程序接口 开发资源 Flutter插件 开发者公开课 百度超级链 区块链开放平台 文档中心 开源社区 GitHub 百度网盘开放平台 文件备份、分享、同步工具 立即申请 应用管理 …
+
+全球 Web 图标
+百度地图开放平台
+https://lbsyun.baidu.com
+百度地图开放平台 | 百度地图API SDK | 地图开发
+网页2013年4月23日 · LBS·云是百度地图针对LBS开发者全新推出的平台级服务。 通过地 …
+
+全球 Web 图标
+Baidu
+https://openapi.baidu.com
+百度开发者中心-汇聚、开放、助力、共赢 - Baidu
+网页2023年2月8日 · 百度地图开放平台 提供基于百度地图的应用程序接口 开发资源 Flutter插件 …
+
+全球 Web 图标
+百度AI开放平台
+https://ai.baidu.com/ai-doc/index/OCR
+百度AI开放平台
+网页百度AI开放平台. 文字识别 OCR. 文字识别OCR（Optical Character Recognition）提供多 …
+
+全球 Web 图标
+Baidu
+https://app.baidu.com
+浏览此图像
+百度移动应用平台
+网页2023年2月13日 · 百度手机助手 百度营销 百度智能云 百度开发者中心 百度AI开放平台 百度其他产品 开发者服务 移动统计 安全加固 百度慧推 隐私检测 语音合成 联系方式 应用问题反馈：kaifazhe@baidu.com 资质问题反 …
+
+全球 Web 图标
+Baidu
+https://open.baidu.com
+百度数据开放平台
+网页2023年4月10日 · 百度本地生活 面向APP、网站、自媒体等免费开放收录商户信息、探店攻 …
+
+全球 Web 图标
+百度翻译开放平台
+api.fanyi.baidu.com
+百度翻译开放平台
+网页百度翻译开放平台支持200+语种、覆盖4万多个语言方向，实时响应海量、复杂的翻译请 …
+
+全球 Web 图标
+百度智能云
+https://cloud.baidu.com/doc/API/index.html
+API中心 - 百度智能云
+网页爱速搭低代码平台 智能边缘 私有网络 应用引擎 文件存储 智能云解析 MapReduce 简单消 …
+
+百度AI开放平台-全球领先的人工智能服务平台
+ai.baidu.com · 2023年5月21日
+####
+反编译工具CrackMinApp查看微信小程序源码
+wafer-client-sdk：Wafer，可用来快速构建具备弹性能力的微信小程序。这是腾讯云团队提供的 SDK，让小程序用户授权会话变得相当方便和简单，同时提供了小程序 SDK、服务器端 SDK。
+
+XpmJS，微信小程序云端增强 SDK。提供了用户登录、WebSocket 通信、微信支付、云端数据表格、文件存储等轮子。
+
+wxParse，微信小程序富文本解析自定义组件。支持 HTML 及 Markdown 解析。有了这个框架，就可以显示基本的 HTML 了，阅读类、资讯类的 App 就拥有了简单高效的富文本显示能力。
+
+wemark，微信小程序 Markdown 渲染库。可用于在小程序中渲染 Markdown。
+
+UI组件
+ZanUI-WeApp，高颜值、好用、易扩展的微信小程序UI库，有赞出品。UI 组件库包含badge、btn、card、cell、color、dialog、form、helper、icon、label、loadmore、panel、quantity、steps、tab、toast、toptip 共计17类组件或元素，设计优美，使用方便。
+
+wx-charts，微信小程序图表 charts 组件。图表组件包含饼图、圆环图、线图、柱状图、区域图、雷达图，为数据分析利器。
+
+weui-wxss，微信官方设计团队提供的一套 UI 组件库，提供了最有用的插件、模块。 当然还有一大批优秀开发者开发出的优秀的库，在此就不一一列出了。
+###
+查看别人小程序源码: Charles工具抓包 下载小程序分析源码
+###
+团队协作中，按页面单位对开发任务进行划分。采用 gulp，对代码进行简单的工程化。我们引入了 Less，将编译的最终 CSS 文件配置为 WXSS 文件，发现这在小程序中完全可行。此外，还增加了对 WXML、JSON 文件的编译，在微信开发者工具中，指定 gulp 生成的 dist 目录，通过常用的热更新功能，便实现了在 VSCode 中编写代码，更改可自动编译为可供微信开发者工具编译运行的小程序代码。代码一有改动，开发者工具指定目录的文件也会相应的被重新编译，开发者工具也会自动重新加载小程序预览，大大加快了编码效率，也方便通过 gulp 进一步拓展我们的编码能力，比如引入 Babel，我们实现了对一些 ES2017 语法的支持，特别是会让前端开发者两眼放光的 Async/Await 异步处理，使我们的小程序开发锦上添花。同时，让我们欣慰的是，小程序自身的异步 API 接口在使用 Await 调用时，表现良好。这次开发的小程序有着非常丰富的交互体验。而最终，我们得到的经验，却是不要尝试在小程序中实现复杂的动效，以及复杂的交互，否则成本投入会远大于预期。这其实是小程序开发中，比较令人失望的一点，得到了最深的教训。小程序的应用场景是简单、用完即走，但让我们没想到的是，连动效也是“动完即走”，官方文档也并没有告诉我们“不要尝试实现复杂的动效和交互”。
+###
+1.下载并安装Freemind(会提示安装Java)https://freemind.en.softonic.com/​freemind.en.softonic.com/
+####### Spring Tools Suite（STS）安装教程
+Spring Tools Suite（STS）安装教程
+STS是一个定制版的Eclipse，专为Spring开发定制的，方便创建、调试、维护Spring应用
+
+下载STS
+推荐两个版本，官网链接先送上，STS3与STS4，根据你电脑的操作系统下载对应的版本
+######
+GitHub 做了一个官方市场，可以搜索到他人提交的 actions。另外，还有一个 awesome actions 的仓库，也可以找到不少 action。
+#####
+ new Promise(function(resolve, reject)Promise是一个构造函数，其原型上有 then、catch方法，还有reslove，reject等静态方法。通过创建Promise实例，可以调用Promise.prototype上的then、catch方法。
+####
+、斜率相关公式：
+
+当直线L的斜率存在时，斜截式y=kx+b，当x=0时，y=b。
+
+当直线L的斜率存在时，点斜式y₂-y₁=k(x₂-x₁)
+
+对于任意函数上任意一点，其斜率等于其切线与x轴正方向所成的角，即k=tanα。
+
+斜率计算：ax+by+c=0中，k=-(a/b)。
+
+两条垂直相交直线的斜率相乘积为-1：k₁·k₂=-1。
+
+2、直线的截距式为x/a+y/b=1（a≠0且b≠0）。其中a指横截距，b指纵截距。即与x轴交点是A(a,0)，与y轴交点是B(0,b) 。平面的截距式为x/a+y/b+z/c=1（a≠0，b≠0且c≠0）。即与x轴交点是P(a,0,0)，与y轴交点是Q(0,b,0) ，与z轴交点是R(0,0,c) 。
+#####
+御剑查后台----》Burp suite 破解登录密码----》
+####
+物联网开发黄金法则：1）设备在哪用--2）选定传感器及执行器--3）参考arduino代码--4)make指令
+https：//cygwin.com/install.html 下载window版Linux命令行
+Arduino是一款便捷灵活、方便上手的开源电子原型平台。包含硬件（各种型号的Arduino板）和软件（IDE）。Arduino能通过各种各样的传感器来感知环境，通过控制灯光、马达和其他的装置来反馈、影响环境。它有着高度分装，方便调用的代码，可以和各类传感器轻松互动，实现我们的创客梦想！有喜欢动手设计的同学，我强烈建议大家入手一套开发板和传感器，通过简单编程让我们的生活智能化！
